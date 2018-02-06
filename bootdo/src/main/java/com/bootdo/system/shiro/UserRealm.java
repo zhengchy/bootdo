@@ -1,10 +1,13 @@
 package com.bootdo.system.shiro;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import com.bootdo.common.config.ApplicationContextRegister;
+import com.bootdo.system.dao.UserRoleDao;
+import com.bootdo.system.domain.UserRoleDO;
 import com.bootdo.system.domain.UserToken;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -50,6 +53,9 @@ public class UserRealm extends AuthorizingRealm {
 		UserDao userMapper = ApplicationContextRegister.getBean(UserDao.class);
 		// 查询用户信息
 		UserDO user = userMapper.list(map).get(0);
+		UserRoleDao userRoleMapper = ApplicationContextRegister.getBean(UserRoleDao.class);
+		List<Long> roleIds = userRoleMapper.listRoleId(user.getUserId());
+		user.setRoleIds(roleIds);
 
 		// 账号不存在
 		if (user == null) {

@@ -69,6 +69,10 @@ function validateRule() {
 				required : true,
 				minlength : 6
 			},
+            mobile : {
+                required : true,
+                minlength : 10
+            },
 			confirm_password : {
 				required : true,
 				minlength : 6,
@@ -96,8 +100,12 @@ function validateRule() {
 			},
 			password : {
 				required : icon + "请输入您的密码",
-				minlength : icon + "密码必须6个字符以上"
+				minlength : icon + "电话至少6位以上"
 			},
+            mobile : {
+                required : icon + "请输入您的电话",
+                minlength : icon + "密码必须10个字符以上"
+            },
 			confirm_password : {
 				required : icon + "请再次输入密码",
 				minlength : icon + "密码必须6个字符以上",

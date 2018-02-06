@@ -60,7 +60,12 @@ function load(deptId) {
 					{
 						field : 'username',
 						title : '用户名'
-					},
+					}
+                    ,
+                    {
+                        field : 'mobile',
+                        title : '手机'
+                    },
 					{
 						field : 'email',
 						title : '邮箱'

@@ -5,6 +5,7 @@ import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.domain.FileDO;
 import com.bootdo.common.domain.Tree;
 import com.bootdo.common.service.FileService;
+import com.bootdo.common.utils.GenUtils;
 import com.bootdo.common.utils.MD5Utils;
 import com.bootdo.common.utils.R;
 import com.bootdo.common.utils.ShiroUtils;
@@ -41,6 +42,18 @@ public class LoginController extends BaseController {
 	@Log("请求访问主页")
 	@GetMapping({ "/index" })
 	String index(Model model) {
+		//加入
+		List<Long> roleIds = getUser().getRoleIds();
+		Long studentPermissionId = GenUtils.getConfig().getLong("studentPermission");
+		if(roleIds!=null){
+			for (int i = 0; i < roleIds.size(); i++) {
+				Long aLong =  roleIds.get(i);
+				if(aLong==studentPermissionId){
+					return "blog/index/main";
+				}
+				
+			}
+		}
 		List<Tree<MenuDO>> menus = menuService.listMenuTree(getUserId());
 		model.addAttribute("menus", menus);
 		model.addAttribute("name", getUser().getName());
