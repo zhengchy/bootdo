@@ -1,5 +1,9 @@
 $().ready(function() {
 	validateRule();
+    $(".form_datetime1").datetimepicker({format: 'yyyy-mm-dd hh:ii:ss'});
+    $(".chosen-select").chosen({
+        maxHeight : 200
+    });
 });
 
 $.validator.setDefaults({

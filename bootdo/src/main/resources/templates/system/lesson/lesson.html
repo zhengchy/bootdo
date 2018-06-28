@@ -19,6 +19,7 @@
 						</div>
 						<div class="columns pull-right">
 							<button class="btn btn-success" onclick="reLoad()">查询</button>
+							<a onclick="window.parent.openContab('/lex/lessonStudent?lessonId=88','aaaa',123)">测试跳转</a>
 						</div>
 						<div class="columns pull-right col-md-2 nopadding">
 							<input id="searchName" type="text" class="form-control"
@@ -57,5 +58,6 @@
 	</div>
 	<div th:include="include :: footer"></div>
 	<script type="text/javascript" src="/js/appjs/sys/lesson/lesson.js"></script>
+	<!--<script type="text/javascript" src="/js/contabs_1.js"></script>-->
 </body>
 </html>

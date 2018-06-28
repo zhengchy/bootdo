@@ -28,6 +28,11 @@
 		</if>
 	</select>
 
+	<select id="getUserByRoleId" resultType="java.util.Map">
+		select sys_user_role.id,sys_user_role.user_id,sys_user_role.role_id,sys_user.username from sys_user_role RIGHT JOIN sys_user on sys_user_role.user_id = sys_user.user_id where
+		sys_user_role.role_id = #{id}
+	</select>
+
 	<select id="count" resultType="int">
 		select count(*) from sys_user_role
 		<where>

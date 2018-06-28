@@ -7,6 +7,8 @@ import com.bootdo.common.domain.FileDO;
 import com.bootdo.common.domain.Tree;
 import com.bootdo.common.service.DictService;
 import com.bootdo.common.utils.*;
+import com.bootdo.lex.domain.LessonStudentDO;
+import com.bootdo.lex.service.LessonStudentService;
 import com.bootdo.system.domain.DeptDO;
 import com.bootdo.system.domain.RoleDO;
 import com.bootdo.system.domain.UserDO;
@@ -40,6 +42,7 @@ public class UserController extends BaseController {
 	RoleService roleService;
 	@Autowired
 	DictService dictService;
+
 	@RequiresPermissions("sys:user:user")
 	@GetMapping("")
 	String user(Model model) {

@@ -21,10 +21,22 @@ public class MenuDO implements Serializable {
 	private String icon;
 	// 排序
 	private Integer orderNum;
+
 	// 创建时间
 	private Date gmtCreate;
 	// 修改时间
 	private Date gmtModified;
+
+
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
+	private Integer state;
 
 	/**
 	 * 设置：

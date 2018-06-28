@@ -153,6 +153,7 @@ public class MenuServiceImpl implements MenuService {
 			Map<String, Object> attributes = new HashMap<>(16);
 			attributes.put("url", sysMenuDO.getUrl());
 			attributes.put("icon", sysMenuDO.getIcon());
+			attributes.put("state", sysMenuDO.getState());
 			tree.setAttributes(attributes);
 			trees.add(tree);
 		}

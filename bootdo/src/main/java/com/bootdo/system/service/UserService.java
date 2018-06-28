@@ -51,4 +51,11 @@ public interface UserService {
 	 * @throws Exception
 	 */
     Map<String, Object> updatePersonalImg(MultipartFile file, String avatar_data, Long userId) throws Exception;
+
+	/**
+	 * 根据权限取得用户列表
+	 * @param id
+	 * @return
+	 */
+	List<Map> getUserByRoleId(Long id);
 }

@@ -155,6 +155,38 @@ $(function () {
         return false;
     }
 
+    /**
+     * 打开菜单
+     * @param dataUrl
+     * @param menuName
+     * @param dataIndex
+     * @returns {boolean}
+     */
+    function openContab(dataUrl,menuName,dataIndex) {
+
+            var str = '<a href="javascript:;" class="active J_menuTab" data-id="' + dataUrl + '">' + menuName + ' <i class="fa fa-times-circle"></i></a>';
+            $('.J_menuTab').removeClass('active');
+
+            // 添加选项卡对应的iframe
+            var str1 = '<iframe class="J_iframe" name="iframe' + dataIndex + '" width="100%" height="100%" src="' + dataUrl + '" frameborder="0" data-id="' + dataUrl + '" seamless></iframe>';
+            $('.J_mainContent').find('iframe.J_iframe').hide().parents('.J_mainContent').append(str1);
+
+            //显示loading提示
+//            var loading = layer.load();
+//
+//            $('.J_mainContent iframe:visible').load(function () {
+//                //iframe加载完成后隐藏loading提示
+//                layer.close(loading);
+//            });
+            // 添加选项卡
+            $('.J_menuTabs .page-tabs-content').append(str);
+            scrollToTab($('.J_menuTab.active'));
+
+        return false;
+
+
+    }
+
     $('.J_menuItem').on('click', menuItem);
 
     // 关闭选项卡菜单

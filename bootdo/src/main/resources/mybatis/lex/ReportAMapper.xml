@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.lex.dao.ReportADao">
+
+	<select id="get" resultType="com.bootdo.lex.domain.ReportADO">
+		select `id`,`a`,`b`,`c`,`d`,`e` from lex_report_a where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.lex.domain.ReportADO">
+		select `id`,`a`,`b`,`c`,`d`,`e` from lex_report_a
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="a != null and a != ''"> and a = #{a} </if>
+		  		  <if test="b != null and b != ''"> and b = #{b} </if>
+		  		  <if test="c != null and c != ''"> and c = #{c} </if>
+		  		  <if test="d != null and d != ''"> and d = #{d} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from lex_report_a
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="a != null and a != ''"> and a = #{a} </if>
+		  		  <if test="b != null and b != ''"> and b = #{b} </if>
+		  		  <if test="c != null and c != ''"> and c = #{c} </if>
+		  		  <if test="d != null and d != ''"> and d = #{d} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.lex.domain.ReportADO" useGeneratedKeys="true" keyProperty="id">
+		insert into lex_report_a
+		(
+			`a`, 
+			`b`, 
+			`c`, 
+			`d`
+		)
+		values
+		(
+			#{a}, 
+			#{b}, 
+			#{c}, 
+			#{d}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.lex.domain.ReportADO">
+		update lex_report_a 
+		<set>
+			<if test="a != null">`a` = #{a}, </if>
+			<if test="b != null">`b` = #{b}, </if>
+			<if test="c != null">`c` = #{c}, </if>
+			<if test="d != null">`d` = #{d}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from lex_report_a where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from lex_report_a where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

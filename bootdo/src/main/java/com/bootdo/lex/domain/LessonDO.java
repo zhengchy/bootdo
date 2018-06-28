@@ -1,5 +1,7 @@
 package com.bootdo.lex.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -26,6 +28,7 @@ public class LessonDO implements Serializable {
 	//
 	private Integer num;
 	//
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date starttime;
 	//
 	private Date endtime;
@@ -105,6 +108,7 @@ public class LessonDO implements Serializable {
 	/**
 	 * 设置：
 	 */
+//	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public void setStarttime(Date starttime) {
 		this.starttime = starttime;
 	}
@@ -198,4 +202,20 @@ public class LessonDO implements Serializable {
 	public Integer getState() {
 		return state;
 	}
+
+
+
+
+
+
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+
+	private String teacherName;
+
 }

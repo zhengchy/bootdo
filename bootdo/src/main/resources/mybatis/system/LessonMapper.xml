@@ -8,7 +8,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.lex.domain.LessonDO">
-		select `id`,`lessonName`,`subjectId`,`teacherId`,`num`,`StartTime`,`EndTime`,`Desc`,`createTime`,`updateTime`,`createUserId`,`updateUserId`,`State` from lex_lesson
+		select `id`,`lessonName`,`subjectId`,`teacherId`,`num`,`StartTime`,`EndTime`,`Desc`,`createTime`,`updateTime`,`createUserId`,`updateUserId`,`State`,sys_user.username as teacherName from lex_lesson LEFT JOIN sys_user on lex_lesson.teacherId = sys_user.user_id
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="lessonname != null and lessonname != ''"> and lessonName = #{lessonname} </if>

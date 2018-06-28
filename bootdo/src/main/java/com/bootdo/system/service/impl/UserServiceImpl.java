@@ -236,4 +236,9 @@ public class UserServiceImpl implements UserService {
 		return result;
     }
 
+	@Override
+	public List<Map> getUserByRoleId(Long id) {
+		return userRoleMapper.getUserByRoleId(id);
+	}
+
 }

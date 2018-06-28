@@ -36,24 +36,24 @@ public class LoginController extends BaseController {
 	FileService fileService;
 	@GetMapping({ "/", "" })
 	String welcome(Model model) {
-		return "redirect:/blog";
+		return "redirect:/login";
 	}
 
 	@Log("请求访问主页")
 	@GetMapping({ "/index" })
 	String index(Model model) {
 		//加入
-		List<Long> roleIds = getUser().getRoleIds();
-		Long studentPermissionId = GenUtils.getConfig().getLong("studentPermission");
-		if(roleIds!=null){
-			for (int i = 0; i < roleIds.size(); i++) {
-				Long aLong =  roleIds.get(i);
-				if(aLong==studentPermissionId){
-					return "blog/index/main";
-				}
-				
-			}
-		}
+//		List<Long> roleIds = getUser().getRoleIds();
+//		Long studentPermissionId = GenUtils.getConfig().getLong("studentPermission");
+//		if(roleIds!=null){
+//			for (int i = 0; i < roleIds.size(); i++) {
+//				Long aLong =  roleIds.get(i);
+//				if(aLong==studentPermissionId){
+//					return "blog/index/main";
+//				}
+//
+//			}
+//		}
 		List<Tree<MenuDO>> menus = menuService.listMenuTree(getUserId());
 		model.addAttribute("menus", menus);
 		model.addAttribute("name", getUser().getName());
@@ -62,10 +62,12 @@ public class LoginController extends BaseController {
 			if(fileService.isExist(fileDO.getUrl())){
 				model.addAttribute("picUrl",fileDO.getUrl());
 			}else {
-				model.addAttribute("picUrl","/img/photo_s.jpg");
+//				model.addAttribute("picUrl","/img/photo_s.jpg");
+				model.addAttribute("picUrl","/img/logo.jpg");
 			}
 		}else {
-			model.addAttribute("picUrl","/img/photo_s.jpg");
+//			model.addAttribute("picUrl","/img/photo_s.jpg");
+			model.addAttribute("picUrl","/img/logo.jpg");
 		}
 		model.addAttribute("username", getUser().getUsername());
 		return "index_v1";

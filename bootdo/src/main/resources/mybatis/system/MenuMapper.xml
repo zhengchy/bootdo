@@ -5,13 +5,13 @@
 
 	<select id="get" resultType="com.bootdo.system.domain.MenuDO">
 		select
-		`menu_id`,`parent_id`,`name`,`url`,`perms`,`type`,`icon`,`order_num`,`gmt_create`,`gmt_modified`
+		`menu_id`,`parent_id`,`name`,`url`,`perms`,`type`,`icon`,`order_num`,`gmt_create`,`gmt_modified`,`state`
 		from sys_menu where menu_id = #{value}
 	</select>
 
 	<select id="list" resultType="com.bootdo.system.domain.MenuDO">
 		select
-		`menu_id`,`parent_id`,`name`,`url`,`perms`,`type`,`icon`,`order_num`,`gmt_create`,`gmt_modified`
+		`menu_id`,`parent_id`,`name`,`url`,`perms`,`type`,`icon`,`order_num`,`gmt_create`,`gmt_modified`,`state`
 		from sys_menu
 		<where>
 			<if test="menuId != null and menuId != ''"> and menu_id = #{menuId} </if>
@@ -113,7 +113,7 @@
 	<select id="listMenuByUserId" resultType="com.bootdo.system.domain.MenuDO">
 		select distinct
 		m.menu_id , parent_id, name, url,
-		perms,`type`,icon,order_num,gmt_create, gmt_modified
+		perms,`type`,icon,order_num,gmt_create, gmt_modified,`state`
 		from sys_menu m
 		left
 		join sys_role_menu rm on m.menu_id = rm.menu_id left join

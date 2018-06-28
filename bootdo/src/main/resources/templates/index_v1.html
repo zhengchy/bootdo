@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
-    <title>乐而学教育后台系统</title>
+    <title>业务管理后台演示系统</title>
     <meta name="keywords" content="面向学习型的开源框架，简洁高效，杜绝过渡封装，展现技术本质本质">
     <meta name="description" content="面向学习型的开源框架，简洁高效，杜绝过渡封装，展现技术本质本质">
     <!--[if lt IE 9]>
@@ -29,9 +29,10 @@
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div>
-                        <span><img alt="image" class="img-circle" height="60" width="60" th:src="${picUrl}"/></span>
+                        <!--<span><img alt="image" class="img-circle" height="60" width="60" th:src="${picUrl}"/></span>-->
+                        <span><img alt="image"  height="60" width="180" th:src="${picUrl}"/></span>
                         <h3 class="" style="color: #ffffff">
-                            </i>乐而学教育
+                            </i>北京神州泰岳
                         </h3>
                     </div>
                     <div class="dropdown profile-element hidden">
@@ -56,7 +57,7 @@
                             <li><a href="/logout">安全退出</a>
                             </li>
                         </ul>
-                        <div class="logo-element">BootDo</div>
+                        <div class="logo-element">演示</div>
                     </div>
                 </li>
                 <li><a href="#"> <i class="fa fa-home"></i> <span
@@ -64,7 +65,7 @@
                 </a>
                     <ul class="nav nav-second-level">
                         <li><a id="index001" class="J_menuItem" href="index_v1.html"
-                               data-index="0" th:href="@{/main}">了解BootDo</a></li>
+                               data-index="0" th:href="@{/main}">演示系统</a></li>
                     </ul>
                 </li>
                 <li th:each="menu : ${menus}"><a href="#"> <i
@@ -75,7 +76,7 @@
                     <ul class="nav nav-second-level">
                         <li th:each="cmenu : ${menu.children}"><a class="J_menuItem" href="graph_echarts.html"
                                                                   th:text="${cmenu.text}"
-                                                                  th:href="${cmenu.attributes.url}">系统管理</a></li>
+                                                                  th:href="${cmenu.attributes.url}"  th:if="${cmenu.attributes.state==0}">系统管理</a></li>
                     </ul>
                 </li>
             </ul>
@@ -171,7 +172,7 @@
                     seamless></iframe>
         </div>
         <div class="footer">
-            <div class="pull-right">BootDo面向学习型的开源框架</div>
+            <div class="pull-right">北京神州泰岳</div>
         </div>
     </div>
     <!--右侧部分结束-->
@@ -288,6 +289,7 @@
 <!-- 自定义js -->
 <script src="/js/app.js?v=4.1.0"></script>
 <script type="text/javascript" src="/js/contabs.js"></script>
+<script type="text/javascript" src="/js/contabs_1.js"></script>
 <!-- 第三方插件 -->
 <script src="/js/plugins/pace/pace.min.js"></script>
 <!-- vue -->

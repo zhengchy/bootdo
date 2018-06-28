@@ -1,5 +1,6 @@
 bootdo:
-  uploadPath: D:/var/uploaded_files/
+#  uploadPath: D:/var/uploaded_files/
+  uploadPath: /Users/chunye/pic/
 logging:
   level:
     com.bootdo: debug

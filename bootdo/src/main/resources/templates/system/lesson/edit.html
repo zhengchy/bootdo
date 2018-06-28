@@ -11,75 +11,89 @@
 						<form class="form-horizontal m-t" id="signupForm">
 						<input id="id" name="id" th:value="${lesson.id}"  type="hidden">
 							<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">课程名称：</label>
 								<div class="col-sm-8">
 									<input id="lessonname" name="lessonname" th:value="${lesson.lessonname}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">学科：</label>
 								<div class="col-sm-8">
 									<input id="subjectid" name="subjectid" th:value="${lesson.subjectid}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">授课老师：</label>
 								<div class="col-sm-8">
 									<input id="teacherid" name="teacherid" th:value="${lesson.teacherid}" class="form-control" type="text">
+									<select data-placeholder="--选择授课老师--" id="teacherid" name="teacherid"
+											class="form-control chosen-select" tabindex="2" required >
+										<option value="">--选择授课老师--</option>
+										<option th:each="list:${teacherList}" th:value="${list.user_id}" th:text="${list.username}" th:selected="${lesson.teacherid==list.user_id}"></option>
+									</select>
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">授课次数：</label>
 								<div class="col-sm-8">
 									<input id="num" name="num" th:value="${lesson.num}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">开始时间：</label>
 								<div class="col-sm-8">
-									<input id="starttime" name="starttime" th:value="${lesson.starttime}" class="form-control" type="text">
+									<!--<input id="starttime" name="starttime" th:value="${lesson.starttime}" class="form-control" type="text">-->
+									<input size="16" id="starttime" name="starttime"  type="text"  th:value="${#dates.format(lesson.starttime,'yyyy-MM-dd HH:mm:ss')}" readonly class="form_datetime1 form-control">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">结束时间：</label>
 								<div class="col-sm-8">
-									<input id="endtime" name="endtime" th:value="${lesson.endtime}" class="form-control" type="text">
+									<input size="16" id="endtime" name="endtime"  type="text"  th:value="${#dates.format(lesson.endtime,'yyyy-MM-dd HH:mm:ss')}" readonly class="form_datetime1 form-control">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">备注：</label>
 								<div class="col-sm-8">
 									<input id="desc" name="desc" th:value="${lesson.desc}" class="form-control" type="text">
+
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">创建时间：</label>
 								<div class="col-sm-8">
-									<input id="createtime" name="createtime" th:value="${lesson.createtime}" class="form-control" type="text">
+
+									<input size="16" id="createtime" name="createtime"  type="text"  th:value="${#dates.format(lesson.createtime,'yyyy-MM-dd HH:mm:ss')}" readonly class="form_datetime1 form-control">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">修改时间：</label>
 								<div class="col-sm-8">
-									<input id="updatetime" name="updatetime" th:value="${lesson.updatetime}" class="form-control" type="text">
+
+									<input size="16" id="updatetime" name="updatetime"  type="text"  th:value="${#dates.format(lesson.updatetime,'yyyy-MM-dd HH:mm:ss')}" readonly class="form_datetime1 form-control">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">创建人员：</label>
 								<div class="col-sm-8">
-									<input id="createuserid" name="createuserid" th:value="${lesson.createuserid}" class="form-control" type="text">
+									<input id="createuserid" name="createuserid" th:value="${lesson.createuserid}" class="form-control" type="text" readonly>
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">修改人员：</label>
 								<div class="col-sm-8">
-									<input id="updateuserid" name="updateuserid" th:value="${lesson.updateuserid}" class="form-control" type="text">
+									<input id="updateuserid" name="updateuserid" th:value="${lesson.updateuserid}" class="form-control" type="text" readonly>
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">状态：</label>
 								<div class="col-sm-8">
-									<input id="state" name="state" th:value="${lesson.state}" class="form-control" type="text">
+									<!--<input id="state" name="state" th:value="${lesson.state==1}?'正常':'禁用'" class="form-control" type="text">-->
+									<select data-placeholder="--状态--" name="state" id="state"
+											class="form-control chosen-select" tabindex="2" required >
+										<option value="1" th:selected="${lesson.state==1}">正常</option>
+										<option value="0" th:selected="${lesson.state==0}">禁用</option>
+									</select>
 								</div>
 							</div>
 																					<div class="form-group">
