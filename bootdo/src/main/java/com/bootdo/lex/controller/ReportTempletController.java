@@ -1,8 +1,16 @@
 package com.bootdo.lex.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.lex.service.ReportAllService;
+import com.chamc.groups.projectmanage.plugin.excel.entity.ExcelConfig;
+import com.chamc.groups.projectmanage.plugin.excel.error.Errors;
+import com.chamc.groups.projectmanage.plugin.excel.utils.ExcelJobUtil;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -20,6 +28,7 @@ import com.bootdo.lex.service.ReportTempletService;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 
@@ -34,6 +43,13 @@ import com.bootdo.common.utils.R;
 public class ReportTempletController {
 	@Autowired
 	private ReportTempletService reportTempletService;
+
+
+	@Autowired
+	private ReportAllService reportAllService;
+
+	@Autowired
+	private ExcelJobUtil excelJobUtil;
 	
 	@GetMapping()
 	@RequiresPermissions("lex:reportTemplet:reportTemplet")
@@ -73,8 +89,38 @@ public class ReportTempletController {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("lex:reportTemplet:add")
-	public R save( ReportTempletDO reportTemplet){
-		if(reportTempletService.save(reportTemplet)>0){
+	public R save( ReportTempletDO reportTemplet,@RequestParam("excelFile")MultipartFile excelFile,@RequestParam("tmpFile")MultipartFile tmpFile) throws Exception{
+		if(excelFile!=null && tmpFile!=null) {
+//		校验数据文件后拽
+			String excel = "xls,xlsx,xlsm";
+			String excelName = excelFile.getOriginalFilename();
+			int a = excelName.lastIndexOf(".");
+			if ((a > -1) && (a < excelName.length())) {
+				if (excel.indexOf(excelName.substring(a + 1)) == -1) {
+					return	R.error("数据文件格式不匹配，需为xls,xlsx,xlsm");
+				}
+			}
+			//校验模本文件后缀
+			String json = "json";
+			String tmpName = tmpFile.getOriginalFilename();
+			int b = tmpName.lastIndexOf(".");
+			if ((b > -1) && (b < tmpName.length())) {
+				if (json.indexOf(tmpName.substring(b + 1)) == -1) {
+					return R.error("模板文件格式不匹配，需为json");
+				}
+			}
+		}else{
+			return	R.error("模板文件与数据文件，必须上传");
+		}
+
+		XSSFWorkbook xssfWorkbook =  new XSSFWorkbook(excelFile.getInputStream());;
+		ExcelConfig config = ExcelConfig.initConfig(tmpFile.getInputStream(),tmpFile.getOriginalFilename());
+		String json = getFileString(tmpFile.getInputStream());
+		reportTemplet.setTmpjson(json);
+		Errors errors = excelJobUtil.execute(xssfWorkbook, config);
+
+//			if(reportTempletService.save(reportTemplet)>0){
+			if(reportTempletService.saveReport(reportTemplet,errors,config)>0){
 			return R.ok();
 		}
 		return R.error();
@@ -112,6 +158,19 @@ public class ReportTempletController {
 	public R remove(@RequestParam("ids[]") Integer[] ids){
 		reportTempletService.batchRemove(ids);
 		return R.ok();
+	}
+
+
+	private String getFileString(InputStream file) throws IOException {
+		ByteArrayOutputStream baos = new  ByteArrayOutputStream();
+		int   i=-1;
+		while((i=file.read())!=-1){
+			baos.write(i);
+		}
+		String jsonStr = baos.toString();
+		baos.close();
+		file.close();
+		return  jsonStr;
 	}
 	
 }

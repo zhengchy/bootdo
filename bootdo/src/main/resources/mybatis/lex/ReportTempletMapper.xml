@@ -42,7 +42,7 @@
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.bootdo.lex.domain.ReportTempletDO">
+	<insert id="save" parameterType="com.bootdo.lex.domain.ReportTempletDO" useGeneratedKeys="true" keyProperty="id">
 		insert into lex_report_templet
 		(
 			`id`, 

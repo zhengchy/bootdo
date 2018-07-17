@@ -3,7 +3,16 @@ $().ready(function() {
     $(".chosen-select").chosen({
         maxHeight : 200
     });
-    $(".form_datetime1").datetimepicker({format: 'yyyy-mm-dd hh:ii:ss'});
+    // $(".form_datetime1").datepicker({format: 'yyyy-mm-dd hh:ii:ss'});
+    // $(".form_datetime1").datetimepicker({language: 'zh-CN',format: 'yyyy-mm-dd hh:ii:ss'});
+    $(".form_datetime1").datetimepicker({language: 'zh-CN',
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        todayBtn: true,
+        startView: 'year',
+        minView:'month',
+        maxView:'decade'
+    });
 });
 
 $.validator.setDefaults({

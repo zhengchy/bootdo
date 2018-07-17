@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.lex.dao.ReportAllDao">
+
+	<select id="get" resultType="com.bootdo.lex.domain.ReportAllDO">
+		select a.`id`,a.`rt_id`,b.`name` as rtName,a.`excel_id`,a.`province`,a.`city`,a.`customerName`,a.`supervision`,a.`supervisionId`,a.`manager`,a.`managerId`,a.`firstTime`,a.`nextTime`,a.`quxianzhengce`,a.`shifouliangge`,a.`linxuanguize`,a.`price`,a.`reportTime`,a.`desc`,a.`zhanbi`,a.`createTime`,a.`lianxifangshi`,a.`state`
+		 from lex_report_all a  left JOIN  lex_report_templet b on  a.rt_id=b.id where a.id = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.lex.domain.ReportAllDO">
+		select a.`id`,b.`name` as rtName,b.`tmpJson` as rtJson,a.`rt_id`,a.`excel_id`,a.`province`,a.`city`,a.`customerName`,a.`supervision`,a.`supervisionId`,a.`manager`,a.`managerId`,a.`firstTime`,a.`nextTime`,a.`quxianzhengce`,a.`shifouliangge`,a.`linxuanguize`,a.`price`,a.`reportTime`,a.`desc`,a.`zhanbi`,a.`createTime`,a.`lianxifangshi`,a.`state`
+		from lex_report_all a  left JOIN  lex_report_templet b on  a.rt_id=b.id
+        <where>  
+		  		  <if test="id != null and id != ''"> and a.id = #{id} </if>
+		  		  <if test="rtId != null and rtId != ''"> and a.rt_id = #{rtId} </if>
+		  		  <if test="excelId != null and excelId != ''"> and a.excel_id = #{excelId} </if>
+		  		  <if test="province != null and province != ''"> and a.province = #{province} </if>
+		  		  <if test="city != null and city != ''"> and a.city = #{city} </if>
+		  		  <if test="customername != null and customername != ''"> and a.customerName = #{customername} </if>
+		  		  <if test="supervision != null and supervision != ''"> and a.supervision = #{supervision} </if>
+		  		  <if test="supervisionid != null and supervisionid != ''"> and a.supervisionId = #{supervisionid} </if>
+		  		  <if test="manager != null and manager != ''"> and a.manager = #{manager} </if>
+		  		  <if test="managerid != null and managerid != ''"> and a.managerId = #{managerid} </if>
+		  		  <if test="firsttime != null and firsttime != ''"> and a.firstTime = #{firsttime} </if>
+		  		  <if test="nexttime != null and nexttime != ''"> and a.nextTime = #{nexttime} </if>
+		  		  <if test="quxianzhengce != null and quxianzhengce != ''"> and a.quxianzhengce = #{quxianzhengce} </if>
+		  		  <if test="shifouliangge != null and shifouliangge != ''"> and a.shifouliangge = #{shifouliangge} </if>
+		  		  <if test="linxuanguize != null and linxuanguize != ''"> and a.linxuanguize = #{linxuanguize} </if>
+		  		  <if test="price != null and price != ''"> and a.price = #{price} </if>
+		  		  <if test="reporttime != null and reporttime != ''"> and a.reportTime = #{reporttime} </if>
+		  		  <if test="desc != null and desc != ''"> and a.desc = #{desc} </if>
+		  		  <if test="zhanbi != null and zhanbi != ''"> and a.zhanbi = #{zhanbi} </if>
+		  		  <if test="createtime != null and createtime != ''"> and a.createTime = #{createtime} </if>
+		  		  <if test="lianxifangshi != null and lianxifangshi != ''"> and a.lianxifangshi = #{lianxifangshi} </if>
+		  		  <if test="state != null and state != ''"> and a.state = #{state} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+
+	<select id="listGroup" resultType="com.bootdo.lex.domain.ReportAllDO">
+		SELECT b.`name` AS rtName ,
+		b.`tmpJson` AS rtJson ,
+		a.`rt_id` ,
+		count(excel_id) as countNum
+		FROM lex_report_all a LEFT JOIN lex_report_templet b ON a.rt_id = b.id
+		<where>
+			<if test="id != null and id != ''"> and a.id = #{id} </if>
+			<if test="rtId != null and rtId != ''"> and a.rt_id = #{rtId} </if>
+			<if test="excelId != null and excelId != ''"> and a.excel_id = #{excelId} </if>
+			<if test="province != null and province != ''"> and a.province = #{province} </if>
+			<if test="city != null and city != ''"> and a.city = #{city} </if>
+			<if test="customername != null and customername != ''"> and a.customerName = #{customername} </if>
+			<if test="supervision != null and supervision != ''"> and a.supervision = #{supervision} </if>
+			<if test="supervisionid != null and supervisionid != ''"> and a.supervisionId = #{supervisionid} </if>
+			<if test="manager != null and manager != ''"> and a.manager = #{manager} </if>
+			<if test="managerid != null and managerid != ''"> and a.managerId = #{managerid} </if>
+			<if test="firsttime != null and firsttime != ''"> and a.firstTime = #{firsttime} </if>
+			<if test="nexttime != null and nexttime != ''"> and a.nextTime = #{nexttime} </if>
+			<if test="quxianzhengce != null and quxianzhengce != ''"> and a.quxianzhengce = #{quxianzhengce} </if>
+			<if test="shifouliangge != null and shifouliangge != ''"> and a.shifouliangge = #{shifouliangge} </if>
+			<if test="linxuanguize != null and linxuanguize != ''"> and a.linxuanguize = #{linxuanguize} </if>
+			<if test="price != null and price != ''"> and a.price = #{price} </if>
+			<if test="reporttime != null and reporttime != ''"> and a.reportTime = #{reporttime} </if>
+			<if test="desc != null and desc != ''"> and a.desc = #{desc} </if>
+			<if test="zhanbi != null and zhanbi != ''"> and a.zhanbi = #{zhanbi} </if>
+			<if test="createtime != null and createtime != ''"> and a.createTime = #{createtime} </if>
+			<if test="lianxifangshi != null and lianxifangshi != ''"> and a.lianxifangshi = #{lianxifangshi} </if>
+			<if test="state != null and state != ''"> and a.state = #{state} </if>
+		</where>
+		GROUP BY rt_id
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from lex_report_all
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="rtId != null and rtId != ''"> and rt_id = #{rtId} </if>
+		  		  <if test="excelId != null and excelId != ''"> and excel_id = #{excelId} </if>
+		  		  <if test="province != null and province != ''"> and province = #{province} </if>
+		  		  <if test="city != null and city != ''"> and city = #{city} </if>
+		  		  <if test="customername != null and customername != ''"> and customerName = #{customername} </if>
+		  		  <if test="supervision != null and supervision != ''"> and supervision = #{supervision} </if>
+		  		  <if test="supervisionid != null and supervisionid != ''"> and supervisionId = #{supervisionid} </if>
+		  		  <if test="manager != null and manager != ''"> and manager = #{manager} </if>
+		  		  <if test="managerid != null and managerid != ''"> and managerId = #{managerid} </if>
+		  		  <if test="firsttime != null and firsttime != ''"> and firstTime = #{firsttime} </if>
+		  		  <if test="nexttime != null and nexttime != ''"> and nextTime = #{nexttime} </if>
+		  		  <if test="quxianzhengce != null and quxianzhengce != ''"> and quxianzhengce = #{quxianzhengce} </if>
+		  		  <if test="shifouliangge != null and shifouliangge != ''"> and shifouliangge = #{shifouliangge} </if>
+		  		  <if test="linxuanguize != null and linxuanguize != ''"> and linxuanguize = #{linxuanguize} </if>
+		  		  <if test="price != null and price != ''"> and price = #{price} </if>
+		  		  <if test="reporttime != null and reporttime != ''"> and reportTime = #{reporttime} </if>
+		  		  <if test="desc != null and desc != ''"> and desc = #{desc} </if>
+		  		  <if test="zhanbi != null and zhanbi != ''"> and zhanbi = #{zhanbi} </if>
+		  		  <if test="createtime != null and createtime != ''"> and createTime = #{createtime} </if>
+		  		  <if test="lianxifangshi != null and lianxifangshi != ''"> and lianxifangshi = #{lianxifangshi} </if>
+			 <if test="state != null and state != ''"> and a.state = #{state} </if>
+		  		</where>
+	</select>
+
+	<select id="countGroup" resultType="int">
+		select count(*) from (SELECT b.`name` AS rtName ,
+		b.`tmpJson` AS rtJson,
+		count(excel_id) as countNum
+		FROM lex_report_all a LEFT JOIN lex_report_templet b ON a.rt_id = b.id
+		 <where>
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="rtId != null and rtId != ''"> and rt_id = #{rtId} </if>
+		  		  <if test="excelId != null and excelId != ''"> and excel_id = #{excelId} </if>
+		  		  <if test="province != null and province != ''"> and province = #{province} </if>
+		  		  <if test="city != null and city != ''"> and city = #{city} </if>
+		  		  <if test="customername != null and customername != ''"> and customerName = #{customername} </if>
+		  		  <if test="supervision != null and supervision != ''"> and supervision = #{supervision} </if>
+		  		  <if test="supervisionid != null and supervisionid != ''"> and supervisionId = #{supervisionid} </if>
+		  		  <if test="manager != null and manager != ''"> and manager = #{manager} </if>
+		  		  <if test="managerid != null and managerid != ''"> and managerId = #{managerid} </if>
+		  		  <if test="firsttime != null and firsttime != ''"> and firstTime = #{firsttime} </if>
+		  		  <if test="nexttime != null and nexttime != ''"> and nextTime = #{nexttime} </if>
+		  		  <if test="quxianzhengce != null and quxianzhengce != ''"> and quxianzhengce = #{quxianzhengce} </if>
+		  		  <if test="shifouliangge != null and shifouliangge != ''"> and shifouliangge = #{shifouliangge} </if>
+		  		  <if test="linxuanguize != null and linxuanguize != ''"> and linxuanguize = #{linxuanguize} </if>
+		  		  <if test="price != null and price != ''"> and price = #{price} </if>
+		  		  <if test="reporttime != null and reporttime != ''"> and reportTime = #{reporttime} </if>
+		  		  <if test="desc != null and desc != ''"> and desc = #{desc} </if>
+		  		  <if test="zhanbi != null and zhanbi != ''"> and zhanbi = #{zhanbi} </if>
+		  		  <if test="createtime != null and createtime != ''"> and createTime = #{createtime} </if>
+		  		  <if test="lianxifangshi != null and lianxifangshi != ''"> and lianxifangshi = #{lianxifangshi} </if>
+			 <if test="state != null and state != ''"> and a.state = #{state} </if>
+		  		</where>
+		GROUP BY rt_id)  aa
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.lex.domain.ReportAllDO" useGeneratedKeys="true" keyProperty="id">
+		insert into lex_report_all
+		(
+			`rt_id`, 
+			`excel_id`, 
+			`province`, 
+			`city`, 
+			`customerName`, 
+			`supervision`, 
+			`supervisionId`, 
+			`manager`, 
+			`managerId`, 
+			`firstTime`, 
+			`nextTime`, 
+			`quxianzhengce`, 
+			`shifouliangge`, 
+			`linxuanguize`, 
+			`price`, 
+			`reportTime`, 
+			`desc`, 
+			`zhanbi`, 
+			`createTime`, 
+			`state`,
+			`lianxifangshi`
+		)
+		values
+		(
+			#{rtId}, 
+			#{excelId}, 
+			#{province}, 
+			#{city}, 
+			#{customername}, 
+			#{supervision}, 
+			#{supervisionid}, 
+			#{manager}, 
+			#{managerid}, 
+			#{firsttime}, 
+			#{nexttime}, 
+			#{quxianzhengce}, 
+			#{shifouliangge}, 
+			#{linxuanguize}, 
+			#{price}, 
+			#{reporttime}, 
+			#{desc}, 
+			#{zhanbi}, 
+			#{createtime}, 
+			#{state},
+			#{lianxifangshi}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.lex.domain.ReportAllDO">
+		update lex_report_all 
+		<set>
+			<if test="rtId != null">`rt_id` = #{rtId}, </if>
+			<if test="excelId != null">`excel_id` = #{excelId}, </if>
+			<if test="province != null">`province` = #{province}, </if>
+			<if test="city != null">`city` = #{city}, </if>
+			<if test="customername != null">`customerName` = #{customername}, </if>
+			<if test="supervision != null">`supervision` = #{supervision}, </if>
+			<if test="supervisionid != null">`supervisionId` = #{supervisionid}, </if>
+			<if test="manager != null">`manager` = #{manager}, </if>
+			<if test="managerid != null">`managerId` = #{managerid}, </if>
+			<if test="firsttime != null">`firstTime` = #{firsttime}, </if>
+			<if test="nexttime != null">`nextTime` = #{nexttime}, </if>
+			<if test="quxianzhengce != null">`quxianzhengce` = #{quxianzhengce}, </if>
+			<if test="shifouliangge != null">`shifouliangge` = #{shifouliangge}, </if>
+			<if test="linxuanguize != null">`linxuanguize` = #{linxuanguize}, </if>
+			<if test="price != null">`price` = #{price}, </if>
+			<if test="reporttime != null">`reportTime` = #{reporttime}, </if>
+			<if test="desc != null">`desc` = #{desc}, </if>
+			<if test="zhanbi != null">`zhanbi` = #{zhanbi}, </if>
+			<if test="createtime != null">`createTime` = #{createtime}, </if>
+			<if test="state != null">`state` = #{state}, </if>
+			<if test="lianxifangshi != null">`lianxifangshi` = #{lianxifangshi}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from lex_report_all where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from lex_report_all where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

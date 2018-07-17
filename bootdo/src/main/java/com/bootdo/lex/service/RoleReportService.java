@@ -1,5 +1,6 @@
 package com.bootdo.lex.service;
 
+import com.bootdo.lex.domain.ReportAllDO;
 import com.bootdo.lex.domain.RoleReportDO;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public interface RoleReportService {
 	RoleReportDO get(Integer id);
 	
 	List<RoleReportDO> list(Map<String, Object> map);
+
+
 	
 	int count(Map<String, Object> map);
 	

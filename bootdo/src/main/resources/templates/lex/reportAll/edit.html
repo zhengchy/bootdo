@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${reportAll.id}"  type="hidden">
+
+							<div class="form-group" th:each="list:${columnList}" >
+								<label class="col-sm-3 control-label" th:text="${list.name}+':'">测试预处理：</label>
+								<div class="col-sm-8" th:if="${!#strings.isEmpty(reportAll.__${list.field}__)}">
+									<label class=" control-label" th:text="${reportAll.__${list.field}__}">测试预处理：</label>
+								</div>
+								<!--<div class="col-sm-8" th:if="${reportAll.__*{list.field}__} == null" >-->
+								<div class="col-sm-8" th:if="${#strings.isEmpty(reportAll.__${list.field}__)}" >
+
+									<input th:if="${!#strings.isEmpty(list.uiType)} and ${list.uiType} eq 'text'" th:id="${list.field}" th:name="${list.field}"    class="form-control" type="text" required>
+
+
+									<select th:if="${!#strings.isEmpty(list.uiType)} and ${list.uiType} eq 'select'" data-placeholder="--请选择--" th:id="${list.field}" th:name="${list.field}"
+											class="form-control" tabindex="2" required>
+										<option value="">-请选择-</option>
+										<option th:each="map:${list.kv}" th:value="${map.value}" th:text="${map.key}"></option>
+												<!--th:selected="${projectBaseinfo.provincecode eq list.province_number}"-->
+									</select>
+
+									<input th:if="${!#strings.isEmpty(list.uiType)} and ${list.uiType} eq 'date'" size="16" th:id="${list.field}" th:name="${list.field}"  type="text"  class="form_datetime1 form-control" required readonly="readonly">
+								</div>
+							</div>
+
+							<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">report_templet主键：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="rtId" name="rtId" th:value="${reportAll.rtId}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">excel文档序号：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="excelId" name="excelId" th:value="${reportAll.excelId}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">省：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="province" name="province" th:value="${reportAll.province}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">城市：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="city" name="city" th:value="${reportAll.city}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">客户名称：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="customername" name="customername" th:value="${reportAll.customername}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">大区总监：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="supervision" name="supervision" th:value="${reportAll.supervision}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">总监ID：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="supervisionid" name="supervisionid" th:value="${reportAll.supervisionid}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">商务经理：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="manager" name="manager" th:value="${reportAll.manager}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">经理Id：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="managerid" name="managerid" th:value="${reportAll.managerid}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">上次省站中标时间：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="firsttime" name="firsttime" th:value="${reportAll.firsttime}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">预计下次省站中标时间：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="nexttime" name="nexttime" th:value="${reportAll.nexttime}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">标期内区县遴选政策：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="quxianzhengce" name="quxianzhengce" th:value="${reportAll.quxianzhengce}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">下次遴选是否可增加为2个或以上规格：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="shifouliangge" name="shifouliangge" th:value="${reportAll.shifouliangge}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">遴选规则：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="linxuanguize" name="linxuanguize" th:value="${reportAll.linxuanguize}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">价格：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="price" name="price" th:value="${reportAll.price}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">日期：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="reporttime" name="reporttime" th:value="${reportAll.reporttime}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">备注：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="desc" name="desc" th:value="${reportAll.desc}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">占比：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="zhanbi" name="zhanbi" th:value="${reportAll.zhanbi}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">创建时间：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="createtime" name="createtime" th:value="${reportAll.createtime}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">联系方式：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="lianxifangshi" name="lianxifangshi" th:value="${reportAll.lianxifangshi}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/lex/reportAll/edit.js">
+	</script>
+	<script th:inline="javascript"  >
+        var columnList = /*[[${columnList}]]*/ null;
+//        console.info(columnList);
+
+        for(var p in columnList){//遍历json数组时，这么写p为索引，0,1
+			if("date"==columnList[p].uiType){
+			    var dateUi = columnList[p].dateTimeUI;
+
+			    if(dateUi!=undefined && dateUi.dateType==1) {
+                    var id = "#" + columnList[p].field;
+                    $(id).datetimepicker({
+                        language: 'zh-CN',
+                        format: 'yyyy-mm',
+                        autoclose: true,
+                        todayBtn: true,
+                        startView: 'year',
+                        minView: 'year',
+                        maxView: 'decade'
+                    });
+                }
+
+                if(dateUi!=undefined && dateUi.dateType==2) {
+                    var id = "#" + columnList[p].field;
+                    $(id).datetimepicker({
+                        language: 'zh-CN',
+                        format: 'yyyy-mm-dd',
+                        autoclose: true,
+                        todayBtn: true,
+                        startView: 'year',
+                        minView:'month',
+                        maxView:'decade'
+                    });
+                }
+			}
+
+//            console.info(columnList[p].uiType + " " + columnList[p].name);
+
+        }
+	</script>
+</body>
+</html>

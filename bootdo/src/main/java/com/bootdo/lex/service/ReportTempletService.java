@@ -1,6 +1,8 @@
 package com.bootdo.lex.service;
 
 import com.bootdo.lex.domain.ReportTempletDO;
+import com.chamc.groups.projectmanage.plugin.excel.entity.ExcelConfig;
+import com.chamc.groups.projectmanage.plugin.excel.error.Errors;
 
 import java.util.List;
 import java.util.Map;
@@ -21,6 +23,8 @@ public interface ReportTempletService {
 	int count(Map<String, Object> map);
 	
 	int save(ReportTempletDO reportTemplet);
+
+	int saveReport(ReportTempletDO reportTemplet,Errors errors,ExcelConfig excelConfig) throws Exception;
 	
 	int update(ReportTempletDO reportTemplet);
 	
